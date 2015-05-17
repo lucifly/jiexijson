@@ -94,9 +94,7 @@ for(i=0; i<edge_num; i++)
 }
 
 
-for (i=0; i<node_num; i++)
-for (j=0; j<(((node_arry[i]).jiekou).out).length; j++)
-    console.log(node_io_arry[i][j][0] + " "+ node_io_arry[i][j][1] + " ");
+
 
 
 // for (i=0; i<node_num; i++)
@@ -127,19 +125,40 @@ for (i=0; i<node_num; i++)
  // for (i=0; i<result_arr.length; i++)
      // console.log(result_arr[i]);
 
-// for(i=0; i<node_num; i++) 
-// {   
-    // console.log("aa: "+result_arr[i]);
-    // var aaaa = result_arr[i];
-    // for(temp_i=0; temp_i<(((node_arry[aaaa]).jiekou).out).length; temp_i++)
-        // {console.log(node_io_arry[aaaa][temp_i]) ;}
-// }
+for(i=0; i<node_num; i++) 
+{   
+    console.log("aa: "+result_arr[i]);
+    var aaaa = result_arr[i];
+    for(temp_i=0; temp_i<(((node_arry[aaaa]).jiekou).out).length; temp_i++)
+        {console.log(node_io_arry[aaaa][temp_i][0] + " "+ node_io_arry[aaaa][temp_i][1] + " ");}
+}
+
+// for (i=0; i<node_num; i++)
+// for (j=0; j<(((node_arry[i]).jiekou).out).length; j++)
+    // console.log(node_io_arry[i][j][0] + " "+ node_io_arry[i][j][1] + " ");
 
 
+// console.log((my_f_json_obj.nodes).action);
 
-
-
-
+// str.replace(/Microsoft/g, "W3School")
+var write_to_file;
+var node_action = new Array();
+for(i=0; i<node_num; i++)
+{  
+    var replace_I_arr = "I_arr";
+    replace_I_arr = replace_I_arr + "_" + i.toString() ;
+    var replace_O_arr = "I_arr";
+    replace_O_arr = replace_O_arr + "_" + i.toString() ;
+    var tempppp = ((node_arry[i]).nodes).action;
+    tempppp = tempppp.replace(/I_arr/g, replace_I_arr);
+    tempppp = tempppp.replace(/O_arr/g, replace_O_arr);
+    
+    var temmmm ="var "+replace_I_arr+"=new Array();var "+replace_O_arr+"=new Array();";
+    tempppp =temmmm +"function do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +"){" + tempppp+ "}";
+    
+    node_action[i] = tempppp;
+    console.log(tempppp);
+}
 
 
 
