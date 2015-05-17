@@ -122,8 +122,8 @@ for (i=0; i<node_num; i++)
     
 }
 
- // for (i=0; i<result_arr.length; i++)
-     // console.log(result_arr[i]);
+ for (i=0; i<result_arr.length; i++)
+     console.log("qwewqr: "+result_arr[i]);
 
 for(i=0; i<node_num; i++) 
 {   
@@ -143,27 +143,48 @@ for(i=0; i<node_num; i++)
 // str.replace(/Microsoft/g, "W3School")
 var write_to_file;
 var node_action = new Array();
+var action_func = new Array();
 for(i=0; i<node_num; i++)
 {  
     var replace_I_arr = "I_arr";
     replace_I_arr = replace_I_arr + "_" + i.toString() ;
-    var replace_O_arr = "I_arr";
+    var replace_O_arr = "O_arr";
     replace_O_arr = replace_O_arr + "_" + i.toString() ;
     var tempppp = ((node_arry[i]).nodes).action;
     tempppp = tempppp.replace(/I_arr/g, replace_I_arr);
     tempppp = tempppp.replace(/O_arr/g, replace_O_arr);
     
     var temmmm ="var "+replace_I_arr+"=new Array();var "+replace_O_arr+"=new Array();";
-    tempppp =temmmm +"function do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +"){" + tempppp+ "}";
-    
+    tempppp =temmmm +"\n function do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +"){" + tempppp+ "};";
+    action_func[i] = "do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +");";
     node_action[i] = tempppp;
-    console.log(tempppp);
+    // console.log("aa:::"+node_action[i]);
+}
+
+    var tttttt = "";
+    var t123 = "";
+    var asdf = "";
+for (i=0; i<result_arr.length; i++)
+{
+    asdf = "";
+    var tqwer = result_arr[i];
+    tttttt = tttttt + node_action[tqwer] + "\n";
+    
+    
+    for(temp_i=0; temp_i<(((node_arry[tqwer]).jiekou).out).length; temp_i++)
+    {
+        if((node_io_arry[tqwer][temp_i][1]) != -1)
+       asdf = asdf + "I_arr_" + (node_io_arry[tqwer][temp_i][0] ).toString()+ "["+(node_io_arry[tqwer][temp_i][1]).toString() +"]" +" = O_arr" + "_" + i.toString()+"["+temp_i+"];\n";
+    }
+    // {console.log(node_io_arry[tqwer][temp_i][0] + " "+ node_io_arry[tqwer][temp_i][1] + " ");}
+    
+    t123 = t123 + action_func[tqwer]+ "\n" + asdf +"\n";
+    
 }
 
 
-
-
-
+    console.log(tttttt+ t123 );
+//
 
 
 
