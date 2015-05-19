@@ -6,6 +6,11 @@ myarry[2] =  new Array(0,1,0,1);
 myarry[1] =  new Array(0,0,0,1);
 myarry[3] =  new Array(0,0,0,0);
 
+//var funny = "hallo world";
+//funny.replace();
+//function good(params) {
+//    {([])}
+//}
 
 var result_arr = new Array();
 var result_count = 0;
