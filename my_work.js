@@ -257,7 +257,7 @@ for(i=0; i<node_num; i++)
     tempppp = tempppp.replace(/O_arr/g, replace_O_arr);
     
     var temmmm ="var "+replace_I_arr+"=new Array();var "+replace_O_arr+"=new Array();";
-    tempppp =temmmm +"\n function do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +"){" + tempppp+ "};";
+    tempppp =temmmm +"     function do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +"){" + tempppp+ "};";
     action_func[i] = "do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +");";
     node_action[i] = tempppp;
     // console.log("aa:::"+node_action[i]);
@@ -272,22 +272,22 @@ for (i=0; i<result_arr.length; i++)
 {
     asdf = "";
     var tqwer = result_arr[i];
-    tttttt = tttttt + node_action[tqwer] + "\n";
+    tttttt = tttttt + node_action[tqwer] + "    ";
     
     
     for(temp_i=0; temp_i<(((node_arry[tqwer]).jiekou).out).length; temp_i++)
     {
         if((node_io_arry[tqwer][temp_i][1]) != -1)
-            asdf = asdf + "I_arr_" + (node_io_arry[tqwer][temp_i][0] ).toString()+ "["+(node_io_arry[tqwer][temp_i][1]).toString() +"]" +" = O_arr" + "_" + tqwer.toString()+"["+temp_i+"];\n";
+            asdf = asdf + "I_arr_" + (node_io_arry[tqwer][temp_i][0] ).toString()+ "["+(node_io_arry[tqwer][temp_i][1]).toString() +"]" +" = O_arr" + "_" + tqwer.toString()+"["+temp_i+"];    ";
         else
         {
-            tetetetet = tetetetet + "O_arr["+out_p_count+"] = "+"O_arr" + "_" + tqwer.toString()+"["+temp_i+"];\n";
+            tetetetet = tetetetet + "O_arr["+out_p_count+"] = "+"O_arr" + "_" + tqwer.toString()+"["+temp_i+"];    ";
             out_p_count = out_p_count + 1;
         }
     }
     // {console.log(node_io_arry[tqwer][temp_i][0] + " "+ node_io_arry[tqwer][temp_i][1] + " ");}
     
-    t123 = t123 + action_func[tqwer]+ "\n" + asdf +"\n";
+    t123 = t123 + action_func[tqwer]+ "    " + asdf +"    ";
     
 }
 
@@ -299,12 +299,50 @@ for(i=0;i<node_num;i++)
     {
         if(node_i_tar[i][temp_i] == 0)
         {
-            rererer = rererer + "I_arr_"+i+"["+ temp_i+"]" +"=" + "I_arr["+ in_p_count +"];\n"; 
+            rererer = rererer + "I_arr_"+i+"["+ temp_i+"]" +"=" + "I_arr["+ in_p_count +"];    "; 
             in_p_count = in_p_count + 1;
         }
     }
 }
-write_to_file =somewords_I_arr +"\naaaa\n"+rererer+ somewords_O_arr + tttttt+ t123 + tetetetet;
+var out_interface = "";
+for(i=0;i<out_p_count;i++)
+{
+    out_interface = out_interface + "\"out_interface_"+ i+"\"";
+    if(i != (out_p_count -1)) 
+       out_interface +=", ";    
+}
+
+var in_interface = "";
+for(i=0;i<in_p_count;i++)
+{
+    in_interface = in_interface + "\"in_interface_"+ i+"\"";
+    if(i != (in_p_count -1)) 
+       in_interface +=", ";    
+}
+write_to_file =somewords_I_arr +"   "+rererer+ somewords_O_arr + tttttt+ t123 + tetetetet;
+//    console.log(write_to_file);
+//    console.log(out_interface + "     adad     " + in_interface);
+//    write_to_file = ""; 
+    write_to_file = ' {\n'+
+ ' "info": {\n'+
+ '   "author": "meemoo",\n'+
+ '   "title": "Untitled",\n'+
+ '   "description": "Meemoo app description",\n'+
+ '   "parents": [],\n'+
+ '   "url": ""\n'+
+ ' },\n'+
+ ' "nodes":\n'+
+ '   {\n'+
+ '     "action": "'+write_to_file+'"\n'+
+ '   },\n'+
+ ' "jiekou": {\n'+
+ '     "out": ['+ out_interface +
+ '     ],\n'+
+ '     "in": ['+ in_interface +
+ '     ]\n'+
+ '   }\n'+
+'}\n';
+
     console.log(write_to_file);
 //
 
