@@ -1,0 +1,43 @@
+
+<html>
+<head>
+<script type="text/javascript" src="i:/nodejsstu/iframework-master/src/nodes/mytry/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(
+	function(){
+		$("p").click(
+			function(){
+				var ulr = "http://localhost:3000?";
+				var real_ulr="http://api.map.baidu.com/location/ip";
+				var real_req="ak=wROHF9YIK6wRPbf4fY2tmkur&coor=bd09ll";
+				ulr=ulr + real_ulr +"&"+real_req;
+				ulr+="&callback=?";
+				var hh = "http://localhost:3000?reqtypr=13&real_ulr=http://api.map.baidu.com/location/ip?ak=wROHF9YIK6wRPbf4fY2tmkur&coor=bd09ll";
+				//http://api.map.baidu.com/location/ip?ak=wROHF9YIK6wRPbf4fY2tmkur&coor=bd09ll
+				hh+="&callback=?";
+				$.get(hh,
+					function(response,status,xhr){
+						//var dataObj = eval_r("("+response+")");
+						console.log(response.r_ulr);
+						},
+					"jsonp"
+				);
+			}
+		);
+	}
+
+);
+      
+
+
+</script>
+
+</head>
+
+
+
+<body>
+<p>touch the p11.</p>
+</body>
+
+</html> 
