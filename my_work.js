@@ -245,6 +245,7 @@ var action_func = new Array();//对应函数应用
 
 var somewords_I_arr = 'var I_arr = new Array();';
 var somewords_O_arr = 'var O_arr = new Array();';
+var var_idfi = ""; 
 
 for(i=0; i<node_num; i++)
 {  
@@ -257,7 +258,8 @@ for(i=0; i<node_num; i++)
     tempppp = tempppp.replace(/O_arr/g, replace_O_arr);
     
     var temmmm ="var "+replace_I_arr+"=new Array();var "+replace_O_arr+"=new Array();";
-    tempppp =temmmm +"     function do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +"){" + tempppp+ "};";
+    var_idfi = var_idfi + temmmm;
+    tempppp = "     function do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +"){" + tempppp+ "};";
     action_func[i] = "do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +");";
     node_action[i] = tempppp;
     // console.log("aa:::"+node_action[i]);
@@ -319,7 +321,7 @@ for(i=0;i<in_p_count;i++)
     if(i != (in_p_count -1)) 
        in_interface +=", ";    
 }
-write_to_file =somewords_I_arr +"   "+rererer+ somewords_O_arr + tttttt+ t123 + tetetetet;
+write_to_file =var_idfi +"   "+rererer/*+ somewords_O_arr*/ + tttttt+ t123 + tetetetet;
 //    console.log(write_to_file);
 //    console.log(out_interface + "     adad     " + in_interface);
 //    write_to_file = ""; 
@@ -344,6 +346,12 @@ write_to_file =somewords_I_arr +"   "+rererer+ somewords_O_arr + tttttt+ t123 + 
 '}\n';
 
     console.log(write_to_file);
+ //写入文件
+ fs.writeFile('I:/nodejsstu/iframework-master/src/nodes/mytry/tst.json', write_to_file, function (err) {
+    if (err) throw err;
+    console.log('It\'s saved!'); //文件被保存
+});   
+    
 //
 
 

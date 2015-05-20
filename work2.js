@@ -5,6 +5,8 @@ var obj=JSON.parse(mess);
 
 //console.log((obj.info).author);
 
+/*èŠ‚ç‚¹æ•°ç»„*/
+var my_node = obj.nodes;
 /******************************************************** *
 [		
       {
@@ -17,34 +19,35 @@ var obj=JSON.parse(mess);
 			"state": {}
       }
 ]
-******************************************************** */
-var my_node = obj.nodes;//½ÚµãÊı×é
-  
+******************************************************** */ 
  
-/******************************************************** *
+/*æœ‰å‘è¾¹æ•°ç»„*/
+var my_edges = obj.edges;
+ /******************************************************** *
 [
 		{
 			"source": [
-				2,       //Êä³ö½Úµã±àºÅ
-				"squared"//Êä³ö½Ó¿ÚÃû
+				2,       //è¾“å‡ºèŠ‚ç‚¹ç¼–å·
+				"squared"//è¾“å‡ºæ¥å£å
 			],
 			"target": [
-				1,       //ÊäÈë½Úµã±àºÅ
-				"input_t"//ÊäÈë½Ó¿ÚÃû
+				1,       //è¾“å…¥èŠ‚ç‚¹ç¼–å·
+				"input_t"//è¾“å…¥æ¥å£å
 			]
 		}
 ]
 ******************************************************** */
-var my_edges = obj.edges;//ÓĞÏò±ßÊı×é
  
- 
-var node_num = my_node.length;//½ÚµãÊıÁ¿
+/*èŠ‚ç‚¹æ•°é‡*/
+var node_num = my_node.length;
 
 
+/*èŠ‚ç‚¹ä¿¡æ¯æ•°ç»„*/
+var node_arry = new Array();
 /******************************************************** 
- node_arry[i].nodes.action string ÏìÓ¦º¯Êı
-             .jiekou.out[] Êä³ö½Ó¿ÚÃû³ÆÊı×é
-             .jiekou.in[]  ÊäÈë½Ó¿ÚÃû³ÆÊı×é
+ node_arry[i].nodes.action string å“åº”å‡½æ•°
+             .jiekou.out[] è¾“å‡ºæ¥å£åç§°æ•°ç»„
+             .jiekou.in[]  è¾“å…¥æ¥å£åç§°æ•°ç»„
 *///////////////////////////////////////////
 /*/////////////////////////////////////////
 {
@@ -71,26 +74,33 @@ var node_num = my_node.length;//½ÚµãÊıÁ¿
     }
 }
 ******************************************************* */
-var node_arry = new Array();//½ÚµãĞÅÏ¢Êı×é
 
 
+/*èŠ‚ç‚¹é‚»æ¥çŸ©é˜µ*/
+var edge_arry = new Array();
 /******************************************************** *
 edge_arry[][]     0 0 1 0
                   1 0 0 0
                   0 0 0 1
    1->0->2->3     0 0 0 0
 ******************************************************** */
-var edge_arry = new Array();//½ÚµãÁÚ½Ó¾ØÕó
 
 
+/*å­˜èŠ‚ç‚¹è¾“å‡ºæƒ…å†µ*/
+var node_io_arry = new Array();
 /******************************************************** *
- node_io_arry[½Úµã±àºÅ][½ÚµãÊä³ö½Ó¿Ú±àºÅ][0] = ¶ÔÓ¦ÏÂÒ»½Úµã±àºÅ
- node_io_arry[½Úµã±àºÅ][½ÚµãÊä³ö½Ó¿Ú±àºÅ][1] = ¶ÔÓ¦ÊäÈë½Ó¿Ú±àºÅ
+ node_io_arry[èŠ‚ç‚¹ç¼–å·][èŠ‚ç‚¹è¾“å‡ºæ¥å£ç¼–å·][0] = å¯¹åº”ä¸‹ä¸€èŠ‚ç‚¹ç¼–å·
+ node_io_arry[èŠ‚ç‚¹ç¼–å·][èŠ‚ç‚¹è¾“å‡ºæ¥å£ç¼–å·][1] = å¯¹åº”è¾“å…¥æ¥å£ç¼–å·
 ******************************************************** */
-var node_io_arry = new Array();//´æ½ÚµãÊä³öÇé¿ö
 
 
-var result_arr = new Array();//½ÚµãÖ´ĞĞ´ÎĞòÊı×é
+/*èŠ‚ç‚¹è¾“å…¥æ¥å£æ ‡è®°*/
+var node_i_tar = new Array();
+/******************************************************** *
+ node_i_tar[èŠ‚ç‚¹ç¼–å·][èŠ‚ç‚¹è¾“å‡ºæ¥å£ç¼–å·] = 0/1
+******************************************************** */
+
+var result_arr = new Array();//èŠ‚ç‚¹æ‰§è¡Œæ¬¡åºæ•°ç»„
 
 var result_count = 0;
 
@@ -99,7 +109,7 @@ var j=0;
 var temp_i = 0;
 var temp_j = 0;
 
-//³õÊ¼»¯ÁÚ½Ó¾ØÕó
+//åˆå§‹åŒ–é‚»æ¥çŸ©é˜µ
 for(i=0; i<node_num; i++) 
 {
     edge_arry[i] = new Array();
@@ -107,7 +117,7 @@ for(i=0; i<node_num; i++)
     { edge_arry[i][j] = 0;}
 }
 
-//Ìî½ÚµãĞÅÏ¢Êı×é
+//å¡«èŠ‚ç‚¹ä¿¡æ¯æ•°ç»„
 for(i=0; i<node_num; i++)
 {
     var file_path = (((my_node[i]).src)) ;
@@ -124,15 +134,20 @@ for(i=0; i<node_num; i++)
    node_arry[i]=JSON.parse(my_f_json);
 }
 
-//³õÊ¼»¯½Úµã½ÓÊı×é
+//åˆå§‹åŒ–èŠ‚ç‚¹æ¥æ•°ç»„
 for(i=0; i<node_num; i++) 
 {
     node_io_arry[i]=new Array();
+    node_i_tar[i] = new Array();
     for(temp_i=0; temp_i<(((node_arry[i]).jiekou).out).length; temp_i++)
         {
             node_io_arry[i][temp_i]=new Array();
             node_io_arry[i][temp_i][0] = -1 ;
             node_io_arry[i][temp_i][1] = -1 ;
+        }
+    for(temp_i=0; temp_i<(((node_arry[i]).jiekou).in).length; temp_i++)
+        {
+            node_i_tar[i][temp_i]=0;
         }
 }
 // for(i=0; i<node_num; i++)
@@ -140,17 +155,17 @@ for(i=0; i<node_num; i++)
 // console.log(((node_arry[i]).nodes).action);
 // }
 
-var edge_num = my_edges.length;//±ßµÄÊıÁ¿
+var edge_num = my_edges.length;//è¾¹çš„æ•°é‡
 
-//Ìî½Úµã½Ó¿ÚÊı,ÁÚ½Ó¾ØÕó
+//å¡«èŠ‚ç‚¹æ¥å£æ•°,é‚»æ¥çŸ©é˜µ
 for(i=0; i<edge_num; i++)
 {
-    var p_s = ((my_edges[i]).source)[0];
-    var p_e = ((my_edges[i]).target)[0];
+    var p_s = ((my_edges[i]).source)[0];//æ•°æ®æºèŠ‚ç‚¹
+    var p_e = ((my_edges[i]).target)[0];//æ•°æ®æ¥æ”¶èŠ‚ç‚¹
     edge_arry[p_s][p_e] = 1;
     
-    var p_s_name = ((my_edges[i]).source)[1];
-    var p_e_name = ((my_edges[i]).target)[1];
+    var p_s_name = ((my_edges[i]).source)[1];//æ•°æ®æºèŠ‚ç‚¹æ¥å£å
+    var p_e_name = ((my_edges[i]).target)[1];//æ•°æ®æ¥æ”¶èŠ‚ç‚¹æ¥å£å
     
     var ll=(((node_arry[p_s]).jiekou).out).length;
     for(temp_i=0; temp_i<ll; temp_i++)
@@ -158,7 +173,7 @@ for(i=0; i<edge_num; i++)
         if( (((node_arry[p_s]).jiekou).out)[temp_i] == p_s_name )
             break;
     }
-    //temp_i
+    //temp_i æ•°æ®æºèŠ‚ç‚¹æ¥å£ç¼–å·
     
     ll=(((node_arry[p_e]).jiekou).in).length;
     for(temp_j=0; temp_j<ll; temp_j++)
@@ -166,11 +181,13 @@ for(i=0; i<edge_num; i++)
         if( (((node_arry[p_e]).jiekou).in)[temp_j] == p_e_name )
             break;
     }
-    //temp_j
+    //temp_j æ•°æ®æ¥æ”¶èŠ‚ç‚¹æ¥å£ç¼–å·
+    
     // console.log(p_s + " " + temp_i + " " + temp_j);
     node_io_arry[p_s][temp_i][1] = temp_j;
     node_io_arry[p_s][temp_i][0] = p_e;
     
+    node_i_tar[p_e][temp_j] = 1;
     // console.log(node_io_arry[p_s][temp_i] +"fffff");
 }
 
@@ -223,11 +240,12 @@ for(i=0; i<node_num; i++)
 
 // str.replace(/Microsoft/g, "W3School")
 var write_to_file;
-var node_action = new Array();//¶ÔÓ¦º¯Êı¶¨Òå
-var action_func = new Array();//¶ÔÓ¦º¯ÊıÓ¦ÓÃ
+var node_action = new Array();//å¯¹åº”å‡½æ•°å®šä¹‰
+var action_func = new Array();//å¯¹åº”å‡½æ•°åº”ç”¨
 
 var somewords_I_arr = 'var I_arr = new Array();';
 var somewords_O_arr = 'var O_arr = new Array();';
+var var_idfi = ""; 
 
 for(i=0; i<node_num; i++)
 {  
@@ -240,7 +258,8 @@ for(i=0; i<node_num; i++)
     tempppp = tempppp.replace(/O_arr/g, replace_O_arr);
     
     var temmmm ="var "+replace_I_arr+"=new Array();var "+replace_O_arr+"=new Array();";
-    tempppp =temmmm +"\n function do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +"){" + tempppp+ "};";
+    var_idfi = var_idfi + temmmm;
+    tempppp = "     function do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +"){" + tempppp+ "};";
     action_func[i] = "do_action"+ "_" + i.toString() +"(" + replace_I_arr +","+ replace_O_arr +");";
     node_action[i] = tempppp;
     // console.log("aa:::"+node_action[i]);
@@ -255,26 +274,84 @@ for (i=0; i<result_arr.length; i++)
 {
     asdf = "";
     var tqwer = result_arr[i];
-    tttttt = tttttt + node_action[tqwer] + "\n";
+    tttttt = tttttt + node_action[tqwer] + "    ";
     
     
     for(temp_i=0; temp_i<(((node_arry[tqwer]).jiekou).out).length; temp_i++)
     {
         if((node_io_arry[tqwer][temp_i][1]) != -1)
-            asdf = asdf + "I_arr_" + (node_io_arry[tqwer][temp_i][0] ).toString()+ "["+(node_io_arry[tqwer][temp_i][1]).toString() +"]" +" = O_arr" + "_" + i.toString()+"["+temp_i+"];\n";
+            asdf = asdf + "I_arr_" + (node_io_arry[tqwer][temp_i][0] ).toString()+ "["+(node_io_arry[tqwer][temp_i][1]).toString() +"]" +" = O_arr" + "_" + tqwer.toString()+"["+temp_i+"];    ";
         else
         {
-            tetetetet = tetetetet + "O_arr["+out_p_count+"] = "+"O_arr" + "_" + i.toString()+"["+temp_i+"];\n";
+            tetetetet = tetetetet + "O_arr["+out_p_count+"] = "+"O_arr" + "_" + tqwer.toString()+"["+temp_i+"];    ";
             out_p_count = out_p_count + 1;
         }
     }
     // {console.log(node_io_arry[tqwer][temp_i][0] + " "+ node_io_arry[tqwer][temp_i][1] + " ");}
     
-    t123 = t123 + action_func[tqwer]+ "\n" + asdf +"\n";
+    t123 = t123 + action_func[tqwer]+ "    " + asdf +"    ";
     
 }
-write_to_file =somewords_I_arr + somewords_O_arr + tttttt+ t123 + tetetetet;
+
+var rererer = "";
+var in_p_count = 0;
+for(i=0;i<node_num;i++)
+{
+    for(temp_i=0; temp_i<(((node_arry[i]).jiekou).in).length; temp_i++)
+    {
+        if(node_i_tar[i][temp_i] == 0)
+        {
+            rererer = rererer + "I_arr_"+i+"["+ temp_i+"]" +"=" + "I_arr["+ in_p_count +"];    "; 
+            in_p_count = in_p_count + 1;
+        }
+    }
+}
+var out_interface = "";
+for(i=0;i<out_p_count;i++)
+{
+    out_interface = out_interface + "\"out_interface_"+ i+"\"";
+    if(i != (out_p_count -1)) 
+       out_interface +=", ";    
+}
+
+var in_interface = "";
+for(i=0;i<in_p_count;i++)
+{
+    in_interface = in_interface + "\"in_interface_"+ i+"\"";
+    if(i != (in_p_count -1)) 
+       in_interface +=", ";    
+}
+write_to_file =var_idfi +"   "+rererer/*+ somewords_O_arr*/ + tttttt+ t123 + tetetetet;
+//    console.log(write_to_file);
+//    console.log(out_interface + "     adad     " + in_interface);
+//    write_to_file = ""; 
+    write_to_file = ' {\n'+
+ ' "info": {\n'+
+ '   "author": "meemoo",\n'+
+ '   "title": "Untitled",\n'+
+ '   "description": "Meemoo app description",\n'+
+ '   "parents": [],\n'+
+ '   "url": ""\n'+
+ ' },\n'+
+ ' "nodes":\n'+
+ '   {\n'+
+ '     "action": "'+write_to_file+'"\n'+
+ '   },\n'+
+ ' "jiekou": {\n'+
+ '     "out": ['+ out_interface +
+ '     ],\n'+
+ '     "in": ['+ in_interface +
+ '     ]\n'+
+ '   }\n'+
+'}\n';
+
     console.log(write_to_file);
+ //å†™å…¥æ–‡ä»¶
+ fs.writeFile('I:/nodejsstu/iframework-master/src/nodes/mytry/tst.json', write_to_file, function (err) {
+    if (err) throw err;
+    console.log('It\'s saved!'); //æ–‡ä»¶è¢«ä¿å­˜
+});   
+    
 //
 
 
