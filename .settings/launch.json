@@ -5,11 +5,11 @@
 	"configurations": [
 		{
 			// Name of configuration; appears in the launch configuration drop down menu.
-			"name": "Launch my_work.js",
+			"name": "Launch http_get.js",
 			// Type of configuration. Possible values: "node", "mono".
 			"type": "node",
 			// Workspace relative or absolute path to the program.
-			"program": "my_work.js",
+			"program": "http_get.js",
 			// Automatically stop program after launch.
 			"stopOnEntry": true,
 			// Command line arguments passed to the program.

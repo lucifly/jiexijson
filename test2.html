@@ -1,0 +1,57 @@
+
+<html>
+<head>
+<script type="text/javascript" src="i:/nodejsstu/iframework-master/src/nodes/mytry/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(
+	function(){
+		$("p").click(
+			function(){
+//				var ulr = "http://localhost:3000?";
+//				var real_ulr="http://api.map.baidu.com/location/ip";
+//				var real_req="ak=wROHF9YIK6wRPbf4fY2tmkur&coor=bd09ll";
+//				ulr=ulr + real_ulr +"&"+real_req;
+//				ulr+="&callback=?";
+//				var hh = "http://localhost:3000?reqtypr=13&real_ulr=http://api.map.baidu.com/location/ip?ak=wROHF9YIK6wRPbf4fY2tmkur&coor=bd09ll";
+//				//http://api.map.baidu.com/location/ip?ak=wROHF9YIK6wRPbf4fY2tmkur&coor=bd09ll
+//				hh+="&callback=?";
+                //{"x":"116.40387397","y":"39.91488908"}
+                var ulr= "http://api2.juheapi.com/park/query";
+                var ak = "45fd7fdd2d047d923e17ab08efa68554";
+                //console.log("x:" +116);
+                //console.log("y:" +39);
+                //var oDis = document.getElementById('distance');
+                //console.log("distance:" + oDis.value);
+                ulr = "http://api2.juheapi.com/park/query?key=45fd7fdd2d047d923e17ab08efa68554&lon=116&lat=39&distance=100&limit=10";
+                console.log(ulr);
+				var hh = "http://localhost:3000?reqtypr=13&real_ulr="+ulr;
+				//http://api.map.baidu.com/location/ip?ak=wROHF9YIK6wRPbf4fY2tmkur&coor=bd09ll
+				hh+="&callback=?";
+                console.log("hh = "+ulr);
+                
+				$.get(hh,
+					function(response,status,xhr){
+						//var dataObj = eval_r("("+response+")");
+						console.log("address : "+(((response.result))[0]).CCDZ);
+						},
+					"jsonp"
+				);
+			}
+		);
+	}
+
+);
+      
+
+
+</script>
+
+</head>
+
+
+
+<body>
+<p>touch the p11.</p>
+</body>
+
+</html> 
